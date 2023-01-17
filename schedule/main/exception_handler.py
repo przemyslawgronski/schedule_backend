@@ -17,7 +17,7 @@ def custom_exception_handler(exc, context):
     if isinstance(exc, ProtectedError):
         response = Response(data={
             'error': 'ProtectedError',
-            'message': 'Cannot delete this object because it is related to other objects.',
+            'message': str(exc.protected_objects)[:100]+'...'
         },
         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
