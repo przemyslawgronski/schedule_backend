@@ -128,7 +128,7 @@ def delete_item(ObjectType, request, id):
     try:
         item.delete()
     except ProtectedError as e:
-        return Response(f"Exception occurred: {e}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        raise e
 
     return Response(f"Usunięto")
 
