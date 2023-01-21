@@ -1,9 +1,14 @@
 from django.db import models
 from django.conf import settings
+# stare: group_name = models.CharField(max_length=30, unique=True, null=True, blank=True)
 
 class Group(models.Model):
-    group_name = models.CharField(max_length=30, unique=True, null=True, blank=True) # groups are not mandatory
+    # TODO: Grupy powinny być obowiązkowe. "Nieprzypisani" grupa powinna być tworzona automatycznie
+    # przy tworzeniu konta nowego użytkownika
     # TODO: zrobić unikalną nazwę grupy ale dla jednego użytkownika a nie dla wszystkich
+
+    group_name = models.CharField(max_length=30)
+
     num_of_shifts = models.PositiveSmallIntegerField()
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
