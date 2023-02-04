@@ -33,8 +33,9 @@ class Employee(models.Model):
         return f'{self.first_name}, {self.last_name}'
 
 class Shift(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT) # one employee can have many shifts
-    group = models.ForeignKey(Group, on_delete=models.PROTECT) # one group can be assigned to multiple shifts
+    employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL) # one employee can have many shifts
+    group = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL) # one group can be assigned to multiple shifts
+    # SET_NULL - user knows that shift was assigned to a group or employee that doesn't exist anymore
     date = models.DateField()
     shift_num = models.PositiveSmallIntegerField()
     updated = models.DateTimeField(auto_now=True)
