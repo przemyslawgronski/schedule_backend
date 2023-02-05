@@ -8,16 +8,6 @@ class GroupSerializer(ModelSerializer):
         model = Group
         fields = '__all__'
 
-class GroupSerializerName(ModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['group_name', 'user']
-
-class GroupSerializerShift(ModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['num_of_shifts', 'user']
-
 
 # -------- Employee Serializers --------
 
@@ -27,21 +17,6 @@ class EmployeeSerializer(ModelSerializer):
     class Meta:
         model = Employee
         fields = '__all__' # ['first_name','last_name','groups','user']
-
-class EmployeeSerializerFirstAndLastName(ModelSerializer):
-    class Meta:
-        model = Employee
-        fields = ['first_name','last_name','user']
-
-class EmployeeSerializerLastName(ModelSerializer):
-    class Meta:
-        model = Employee
-        fields = ['last_name','user']
-
-class EmployeeSerializerGroups(ModelSerializer):
-    class Meta:
-        model = Employee
-        fields = ['groups','user']
 
 
 # -------- Shift Serializers --------
