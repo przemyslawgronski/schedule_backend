@@ -102,6 +102,7 @@ def get_item(ObjectType, ObjectSerializer, request, id):
 
 
 def change_item(ObjectType, ObjectSerializer, request, id, fields):
+
     item = get_obj(ObjectType, request, id)
     data_to_serialize = { field:request.data[field] for field in fields }
 
