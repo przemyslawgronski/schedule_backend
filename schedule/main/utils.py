@@ -25,7 +25,7 @@ def solve_problem(request):
     
     return Response(result)
 
-# TODO: Save result to database or change if shift exists
+# TODO: What to do if there are already shifts in the database?
 # TODO: Generate download link
 
 
