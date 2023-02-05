@@ -6,6 +6,7 @@ class Group(models.Model):
     group_name = models.CharField(max_length=30)
     num_of_shifts = models.PositiveSmallIntegerField()
     updated = models.DateTimeField(auto_now=True)
+    hide = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
@@ -21,6 +22,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=30)
     groups = models.ManyToManyField(Group, blank=True) # Many employees - many groups
     updated = models.DateTimeField(auto_now=True)
+    hide = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
