@@ -8,7 +8,7 @@ from .models import Employee, Group, Shift
 class GroupSerializer(ModelSerializer):
     class Meta:
         model = Group
-        fields = ['id','group_name','num_of_shifts', 'updated']
+        fields = ['id','group_name','num_of_shifts', 'updated', 'hide']
 
 # -------- Employee Serializers --------
 
@@ -17,7 +17,7 @@ class EmployeeSerializer(ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ['id','first_name','last_name','groups','updated']
+        fields = ['id','first_name','last_name','groups','updated', 'hide']
 
 
 # -------- Shift Serializers --------
