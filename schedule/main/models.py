@@ -29,6 +29,7 @@ class Employee(models.Model):
     def __str__(self) -> str:
         return f'{self.first_name}, {self.last_name}'
 
+
 class Shift(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE) # one employee can have many shifts
     group = models.ForeignKey(Group, on_delete=models.CASCADE) # one group can be assigned to multiple shifts
