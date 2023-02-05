@@ -1,13 +1,12 @@
 from django.db import models
 from django.conf import settings
 
- # Grupy nie są obowiązkowe, ale bez nich się nie utworzy zmian.
+
 class Group(models.Model):
     group_name = models.CharField(max_length=30)
     num_of_shifts = models.PositiveSmallIntegerField()
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # on_delete=models.CASCADE Removes this field if user is deleted
 
     class Meta:
         ordering = ['-updated']
@@ -18,8 +17,6 @@ class Group(models.Model):
     
 
 class Employee(models.Model):
-    # TODO: When employee is deleted and shifts exists then change the name of the employee to "deleted"
-    # If shifts connected to this employee doesn't exists then delete shifts
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     groups = models.ManyToManyField(Group, blank=True) # Many employees - many groups
