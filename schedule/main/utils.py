@@ -139,7 +139,7 @@ def get_obj(ObjectType, request, id):
     except Exception as e:
         return Response(f"Exception occurred: {e}")
 
-    if item.user != request.user:
+    if item.user != request.user: #TODO: Create Exception
         return Response("Bad user")
     
     return item
