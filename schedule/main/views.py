@@ -1,6 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
 from .models import Group
 from .serializers import EmployeeSerializer, GroupSerializer
 from .utils import *
@@ -15,7 +14,7 @@ def groups(request):
 
     if request.method == 'POST':
         return create_item(GroupSerializer, request, ["group_name","num_of_shifts"])
-
+        # hide id false by default
 
 @api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticated])
@@ -60,7 +59,7 @@ def employee(request, id):
         return get_item(Employee, EmployeeSerializer, request, id)
 
     if request.method == "PUT":
-        return change_item(Employee, EmployeeSerializer, request, id, ["first_name","last_name","groups"])
+        return change_item(Employee, EmployeeSerializer, request, id, ["first_name","last_name","groups", "hide"])
 
 
 @api_view(['GET'])
