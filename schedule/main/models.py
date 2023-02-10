@@ -47,4 +47,30 @@ class Shift(models.Model):
     def __str__(self) -> str:
         return f'{self.employee.first_name}, {self.date}, {self.shift_num}'
 
+class Constraints(models.Model):
+    representation = models.CharField(max_length=30)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE) # one group can have many constraints
+    updated = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-updated']
+
+    def __str__(self) -> str:
+        return f'{self.representation}'
+
+
+class AvaibleConstraints(models.Model):
+    '''Globally avaible constraints edited by admin only (superuser)'''
+    representation = models.CharField(max_length=30)
+    constraints = models.ForeignKey(Constraints, on_delete=models.SET_NULL, null=True) # one constraint can have many avaible constraints
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated']
+
+    def __str__(self) -> str:
+        return f'{self.representation}'
+
+
 # user - users can modify only rows created by them
