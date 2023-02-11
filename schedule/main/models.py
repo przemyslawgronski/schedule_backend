@@ -5,8 +5,9 @@ from django.conf import settings
 class Group(models.Model):
     group_name = models.CharField(max_length=30)
     num_of_shifts = models.PositiveSmallIntegerField()
-    updated = models.DateTimeField(auto_now=True)
+    constraints = models.ForeignKey('Constraints', on_delete=models.CASCADE, blank=True, null=True) # one set of constraints can be assigned to multiple groups
     hide = models.BooleanField(default=False)
+    updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
@@ -47,11 +48,11 @@ class Shift(models.Model):
     def __str__(self) -> str:
         return f'{self.employee.first_name}, {self.date}, {self.shift_num}'
 
-class Constraints(models.Model):
-    representation = models.CharField(max_length=30)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE) # one group can have many constraints
+
+class AvaibleConstraints(models.Model):
+    '''Avaible constraints edited by admin only (superuser)'''
+    name = models.CharField(max_length=30)
     updated = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-updated']
@@ -60,11 +61,12 @@ class Constraints(models.Model):
         return f'{self.representation}'
 
 
-class AvaibleConstraints(models.Model):
-    '''Globally avaible constraints edited by admin only (superuser)'''
+class Constraints(models.Model):
+    '''Sets of avaible constraints'''
     representation = models.CharField(max_length=30)
-    constraints = models.ForeignKey(Constraints, on_delete=models.SET_NULL, null=True) # one constraint can have many avaible constraints
+    avaible_constraints = models.ManyToManyField(AvaibleConstraints, blank=True) # Many constraints - many avaible constraints
     updated = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-updated']
