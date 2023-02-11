@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class Group(models.Model):
-    group_name = models.CharField(max_length=30)
+    group_name = models.CharField(max_length=50)
     num_of_shifts = models.PositiveSmallIntegerField()
     constraints = models.ForeignKey('Constraints', on_delete=models.SET_NULL, blank=True, null=True)
     # one set of constraints can be assigned to multiple groups
@@ -53,8 +53,9 @@ class Shift(models.Model):
 
 class AvaibleConstraints(models.Model):
     '''Avaible constraints edited by admin only (superuser)'''
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
     updated = models.DateTimeField(auto_now=True)
+    description = models.TextField() # text that deeply explain the constraint
 
     class Meta:
         ordering = ['-updated']
@@ -62,7 +63,7 @@ class AvaibleConstraints(models.Model):
 
 class Constraints(models.Model):
     '''Sets of avaible constraints'''
-    representation = models.CharField(max_length=30)
+    representation = models.CharField(max_length=50)
     avaible_constraints = models.ManyToManyField(AvaibleConstraints, blank=True) # Many constraints - many avaible constraints
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
