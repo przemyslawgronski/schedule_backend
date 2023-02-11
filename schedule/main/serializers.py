@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Employee, Group, Shift
+from .models import Employee, Group, Shift, Constraints, AvaibleConstraints
 
 # There is no need to include user id
 
@@ -30,3 +30,21 @@ class ShiftSerializer(ModelSerializer):
         model = Shift
         fields = '__all__'
         #fields = ['id','employee','group','date','shift_num','updated']
+
+
+# -------- Constraints Serializers --------
+
+class ConstraintsSerializer(ModelSerializer):
+
+    class Meta:
+        model = Constraints
+        fields = '__all__'
+
+
+# -------- AvaibleConstraints Serializers --------
+
+class AvaibleConstraintsSerializer(ModelSerializer):
+
+    class Meta:
+        model = AvaibleConstraints
+        fields = '__all__'
