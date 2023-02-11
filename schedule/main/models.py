@@ -5,7 +5,9 @@ from django.conf import settings
 class Group(models.Model):
     group_name = models.CharField(max_length=30)
     num_of_shifts = models.PositiveSmallIntegerField()
-    constraints = models.ForeignKey('Constraints', on_delete=models.CASCADE, blank=True, null=True) # one set of constraints can be assigned to multiple groups
+    constraints = models.ForeignKey('Constraints', on_delete=models.SET_NULL, blank=True, null=True)
+    # one set of constraints can be assigned to multiple groups
+    # SET_NULL - Set this field to null if constraints are deleted
     hide = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
