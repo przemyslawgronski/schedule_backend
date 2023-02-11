@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import employees_group, group_employees, groups, group, employees, employee, constraints, save_solution, render_solution, years_months_with_shifts, shifts
+from .views import *
 
 urlpatterns = [
     path('groups', groups),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('employees/<int:id>', employee),
     path('employees/<int:id>/groups', employees_group),
     path('constraints', constraints),
+    path('avaible-constraints', avaible_constraints),
     path('save-solution', save_solution),
     path('render-solution', render_solution),
     path('years-months-with-shifts', years_months_with_shifts),

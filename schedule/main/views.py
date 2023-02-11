@@ -76,6 +76,13 @@ def constraints(request):
     if request.method == 'GET':
         return get_constraints()
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def avaible_constraints(request):
+
+    if request.method == 'GET':
+        return get_avaible_constraints()
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def save_solution(request):

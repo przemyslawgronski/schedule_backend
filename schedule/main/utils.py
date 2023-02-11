@@ -12,6 +12,9 @@ from django.db.models import ProtectedError
 
 def get_constraints():
     return Response(['1_prac_na_zmianie', 'max_1_prac_na_dzien', 'po_rowno'])
+
+def get_avaible_constraints():
+    return Response(['1_prac_na_zmianie', 'max_1_prac_na_dzien', 'po_rowno'])
     
 def solve_problem(request):
 
