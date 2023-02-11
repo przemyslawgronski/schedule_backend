@@ -59,9 +59,6 @@ class AvaibleConstraints(models.Model):
     class Meta:
         ordering = ['-updated']
 
-    def __str__(self) -> str:
-        return f'{self.representation}'
-
 
 class Constraints(models.Model):
     '''Sets of avaible constraints'''
