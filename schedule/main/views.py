@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .models import Group
-from .serializers import EmployeeSerializer, GroupSerializer
+from .models import Group, Employee, Constraints, AvaibleConstraints
+from .serializers import EmployeeSerializer, GroupSerializer, ConstraintsSerializer, AvaibleConstraintsSerializer
 from .utils import *
 
 
@@ -69,19 +69,44 @@ def employees_group(request, id):
     if request.method == 'GET':
         return get_items_by_item(Group, GroupSerializer, request, **{'employee__id':id})
 
-@api_view(['GET'])
+
+# ------------------- Constraints -------------------
+
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def constraints(request):
 
     if request.method == 'GET':
-        return get_constraints()
+        return get_items_by_item(Constraints, ConstraintsSerializer, request)
+
+    if request.method == 'POST':
+        return create_item(ConstraintsSerializer, request, ["representation","avaible_constraints"])
+
+@api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
+def constraint(request, id):
+
+    if request.method == 'DELETE':
+        return delete_item(Constraints, request, id)
+
+    if request.method == 'GET':
+        return get_item(Constraints, ConstraintsSerializer, request, id)
+
+    if request.method == "PUT":
+        return change_item(Constraints, ConstraintsSerializer, request, id, ["representation","avaible_constraints"])
+
+# ------------------- Available Constraints -------------------
+# Only GET method, avaible constraints can be managed only by admin
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def avaible_constraints(request):
+def available_constraints(request):
 
     if request.method == 'GET':
-        return get_avaible_constraints()
+        return get_items_by_item(AvaibleConstraints, AvaibleConstraintsSerializer, request)
+
+
+# ------------------- Shifts -------------------
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
