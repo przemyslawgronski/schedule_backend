@@ -74,6 +74,7 @@ def get_shifts(request, year, month):
     
     return Response(ShiftSerializer(shifts, many=True).data)
 
+# ------ Generic functions for views -----------
 
 # get multiple items
 
