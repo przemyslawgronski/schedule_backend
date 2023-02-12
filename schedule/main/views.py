@@ -103,7 +103,7 @@ def constraint(request, id):
 def available_constraints(request):
 
     if request.method == 'GET':
-        return get_items_by_item(AvaibleConstraints, AvaibleConstraintsSerializer, request)
+        return get_items_non_personal(AvaibleConstraints, AvaibleConstraintsSerializer, request)
 
 
 # ------------------- Shifts -------------------

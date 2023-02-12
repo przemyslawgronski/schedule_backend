@@ -18,13 +18,13 @@ def solve_constraints(num_days:int, num_shifts:int, employees=None, constraints=
                 shifts[(n, d, s)] = model.NewBoolVar(f'shift_n{n}d{d}s{s}')
 
     # Each shift is assigned to exactly one employee in .
-    if '1_prac_na_zmianie' in constraints:
+    if '1 pracownik na zmianie' in constraints:
         for d in all_days:
             for s in all_shifts:
                 model.Add(sum(shifts[(n, d, s)] for n in all_employees) == 1)
 
     # Each employee works at most one shift per day.
-    if 'max_1_prac_na_dzien' in constraints:
+    if 'Maksymalnie 1 pracownik na dzień' in constraints:
         for n in all_employees:
             for d in all_days:
                 model.Add(sum(shifts[(n, d, s)] for s in all_shifts) <= 1)
@@ -39,7 +39,7 @@ def solve_constraints(num_days:int, num_shifts:int, employees=None, constraints=
                 # day_off - list of days
                 model.Add(sum(shifts[(emp_id, day_off, s)] for s in all_shifts) == 0)
 
-    if 'po_rowno' in  constraints:
+    if 'Po równo' in  constraints:
         lista_sum = []
 
         for n in all_employees:

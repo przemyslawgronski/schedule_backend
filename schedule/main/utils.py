@@ -82,6 +82,10 @@ def get_items_by_item(ObjType, ObjSerializer, request, **kwargs):
     objects = ObjType.objects.filter(user=request.user, **kwargs)
     return Response(ObjSerializer(objects, many=True).data)
 
+def get_items_non_personal(ObjType, ObjSerializer, request):
+    '''Every user will see the same objects'''
+    objects = ObjType.objects.all()
+    return Response(ObjSerializer(objects, many=True).data)
 
 # create_item, get_item, change_item, delete_item
 
