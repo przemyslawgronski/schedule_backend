@@ -53,7 +53,7 @@ class Shift(models.Model):
 
 class AvaibleConstraints(models.Model):
     '''Avaible constraints edited by admin only (superuser)'''
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField() # text that deeply explain the constraint
 
@@ -70,6 +70,7 @@ class Constraints(models.Model):
 
     class Meta:
         ordering = ['-updated']
+        unique_together = (('representation', 'user'),) # Unique name of the group for a given user
 
     def __str__(self) -> str:
         return f'{self.representation}'
