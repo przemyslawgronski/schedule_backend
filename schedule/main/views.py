@@ -24,7 +24,7 @@ def group(request, id):
         return get_item(Group, GroupSerializer, request, id)
 
     if request.method == "PUT":
-        return change_item(Group, GroupSerializer, request, id, ["group_name", "num_of_shifts", "hide"])
+        return change_item(Group, GroupSerializer, request, id, ["group_name", "num_of_shifts", "constraints", "hide"])
 
     if request.method == 'DELETE':
         return delete_item(Group, request, id)
