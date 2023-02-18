@@ -13,7 +13,7 @@ def groups(request):
         return get_items_by_item(Group, GroupSerializer, request)
 
     if request.method == 'POST':
-        return create_item(GroupSerializer, request, ["group_name","num_of_shifts"])
+        return create_item(GroupSerializer, request, ["group_name","num_of_shifts", "constraints"])
         # hide id false by default
 
 @api_view(['GET', 'DELETE', 'PUT'])
