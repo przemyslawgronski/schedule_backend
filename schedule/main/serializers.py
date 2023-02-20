@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Employee, Group, Shift, Constraints, AvaibleConstraints
+from .models import Employee, Group, Shift, Constraints, AvailableConstraints
 
 # There is no need to include user id
 
@@ -41,10 +41,10 @@ class ConstraintsSerializer(ModelSerializer):
         fields = '__all__'
 
 
-# -------- AvaibleConstraints Serializers --------
+# -------- AvailableConstraints Serializers --------
 
-class AvaibleConstraintsSerializer(ModelSerializer):
+class AvailableConstraintsSerializer(ModelSerializer):
 
     class Meta:
-        model = AvaibleConstraints
+        model = AvailableConstraints
         fields = '__all__'

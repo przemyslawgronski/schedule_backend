@@ -2,6 +2,6 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import AvaibleConstraints
+from .models import AvailableConstraints
 
-admin.site.register(AvaibleConstraints)
+admin.site.register(AvailableConstraints)

@@ -2,8 +2,8 @@ from django.db import models
 from django.conf import settings
 
 
-class AvaibleConstraints(models.Model):
-    '''Avaible constraints edited by admin only (superuser)'''
+class AvailableConstraints(models.Model):
+    '''Available constraints edited by admin only (superuser)'''
     name = models.CharField(max_length=50, unique=True)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField() # text that deeply explain the constraint
@@ -13,9 +13,9 @@ class AvaibleConstraints(models.Model):
 
 
 class Constraints(models.Model):
-    '''Sets of avaible constraints'''
+    '''Sets of available constraints'''
     representation = models.CharField(max_length=50)
-    avaible_constraints = models.ManyToManyField(AvaibleConstraints, blank=True) # Many constraints - many avaible constraints
+    available_constraints = models.ManyToManyField(AvailableConstraints, blank=True) # Many constraints - many available constraints
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

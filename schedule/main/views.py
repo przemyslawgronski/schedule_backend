@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .models import Group, Employee, Constraints, AvaibleConstraints
-from .serializers import EmployeeSerializer, GroupSerializer, ConstraintsSerializer, AvaibleConstraintsSerializer
+from .models import Group, Employee, Constraints, AvailableConstraints
+from .serializers import EmployeeSerializer, GroupSerializer, ConstraintsSerializer, AvailableConstraintsSerializer
 from .utils import *
 
 
@@ -80,7 +80,7 @@ def constraints(request):
         return get_items_by_item(Constraints, ConstraintsSerializer, request)
 
     if request.method == 'POST':
-        return create_item(ConstraintsSerializer, request, ["representation","avaible_constraints"])
+        return create_item(ConstraintsSerializer, request, ["representation","available_constraints"])
 
 @api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticated])
@@ -93,17 +93,17 @@ def constraint(request, id):
         return get_item(Constraints, ConstraintsSerializer, request, id)
 
     if request.method == "PUT":
-        return change_item(Constraints, ConstraintsSerializer, request, id, ["representation","avaible_constraints"])
+        return change_item(Constraints, ConstraintsSerializer, request, id, ["representation","available_constraints"])
 
 # ------------------- Available Constraints -------------------
-# Only GET method, avaible constraints can be managed only by admin
+# Only GET method, available constraints can be managed only by admin
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def available_constraints(request):
 
     if request.method == 'GET':
-        return get_items_non_personal(AvaibleConstraints, AvaibleConstraintsSerializer, request)
+        return get_items_non_personal(AvailableConstraints, AvailableConstraintsSerializer, request)
 
 
 # ------------------- Shifts -------------------

@@ -9,12 +9,6 @@ from django.db.models import ProtectedError
 
 
 # --------------- constraints -----------------
-
-# def get_constraints():
-#     return Response(['1_prac_na_zmianie', 'max_1_prac_na_dzien', 'po_rowno'])
-
-# def get_avaible_constraints():
-#     return Response(['1_prac_na_zmianie', 'max_1_prac_na_dzien', 'po_rowno'])
     
 def solve_problem(request):
 
@@ -25,7 +19,7 @@ def solve_problem(request):
         num_days  = request.data['num_days'],
         employees = [int(k) for k in request.data['checkedBoxes'].keys()],
         num_shifts = chosen_group.num_of_shifts,
-        constraints = [c.name for c in constraints.avaible_constraints.all()],
+        constraints = [c.name for c in constraints.available_constraints.all()],
         days_off = { int(k):v for k,v in request.data['checkedBoxes'].items()},
     )
     
