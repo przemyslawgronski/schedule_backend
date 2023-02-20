@@ -18,12 +18,15 @@ from django.db.models import ProtectedError
     
 def solve_problem(request):
 
+    chosen_group = request.user.group_set.get(id=request.data['group_id'])
+    constraints = request.user.constraints_set.get(id=chosen_group.constraints_id)
+
     result = solve_constraints(
-        num_days=request.data['num_days'],
-        employees=[int(k) for k in request.data['checkedBoxes'].keys()],
-        num_shifts=request.data['num_shifts'],
-        constraints=[c for c in request.data['constraints'] if request.data['constraints'][c]],
-        days_off={ int(k):v for k,v in request.data['checkedBoxes'].items()},
+        num_days  = request.data['num_days'],
+        employees = [int(k) for k in request.data['checkedBoxes'].keys()],
+        num_shifts = chosen_group.num_of_shifts,
+        constraints = [c.name for c in constraints.avaible_constraints.all()],
+        days_off = { int(k):v for k,v in request.data['checkedBoxes'].items()},
     )
     
     return Response(result)
