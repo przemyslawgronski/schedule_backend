@@ -33,6 +33,15 @@ def create_shifts(request):
 
     user = request.user
 
+    # Cancel if there are already shifts in the database for this group at the same day
+    # if user.shift_set.filter(
+    #     group = user.group_set.get(id=request.data["group_id"]),
+    #     date__year = request.data['year'],
+    #     date__month = request.data['month']+1, # +1 to convert from 0 to 1 based
+    # ).exists():
+    #     print("There are already shifts in the database for this group at the same day")
+
+
     for day in request.data['solution']:
         for emp_id in request.data['solution'][day]:
             for shift in request.data['solution'][day][emp_id]:
