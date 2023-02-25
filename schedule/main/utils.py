@@ -80,6 +80,12 @@ def get_shifts(request, year, month):
     
     return Response(ShiftSerializer(shifts, many=True).data)
 
+def delete_shifts(request, year, month):
+    user = request.user
+    shifts = user.shift_set.filter(date__year=year, date__month=month)
+    shifts.delete()
+    return Response("Usunięto")
+
 # ------ Generic functions for views -----------
 
 # get multiple items

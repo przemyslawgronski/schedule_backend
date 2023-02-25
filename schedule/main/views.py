@@ -129,9 +129,12 @@ def years_months_with_shifts(request):
     if request.method == "GET":
         return years_and_months_with_shifts(request)
 
-@api_view(['GET'])
+@api_view(['GET', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def shifts(request, year, month):
 
     if request.method == 'GET':
         return get_shifts(request, year, month)
+    
+    if request.method == 'DELETE':
+        return delete_shifts(request, year, month)
