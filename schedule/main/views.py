@@ -124,10 +124,10 @@ def render_solution(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def years_months_with_shifts(request):
+def years_months_with_shifts_by_group(request, id):
 
     if request.method == "GET":
-        return years_and_months_with_shifts(request)
+        return years_and_months_with_shifts(request, group_id=id)
 
 @api_view(['GET', 'DELETE'])
 @permission_classes([IsAuthenticated])

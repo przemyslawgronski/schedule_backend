@@ -56,12 +56,15 @@ def create_shifts(request):
     return Response("Zapisano")
 
 
-def years_and_months_with_shifts(request):
+def years_and_months_with_shifts(request, group_id):
 
     user = request.user
 
     # <QuerySet [{'year': 2022, 'month': 7}, {'year': 2021, 'month': 7}, ...]
-    years_and_months = user.shift_set.values(year=ExtractYear('date'), month=ExtractMonth('date')).distinct().order_by()
+    years_and_months = user.shift_set.filter(group_id=group_id).values(
+        year=ExtractYear('date'),
+        month=ExtractMonth('date')
+        ).distinct().order_by()
 
     years_and_months_to_send = defaultdict(set)
 

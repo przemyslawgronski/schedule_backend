@@ -13,6 +13,6 @@ urlpatterns = [
     path('available-constraints', available_constraints),
     path('save-solution', save_solution),
     path('render-solution', render_solution),
-    path('years-months-with-shifts', years_months_with_shifts),
+    path('groups/<int:id>/years-months-with-shifts', years_months_with_shifts_by_group),
     path('shifts/<int:year>/<int:month>', shifts),
 ]
