@@ -77,15 +77,15 @@ def years_and_months_with_shifts(request, group_id):
     return Response(years_and_months_to_send)
 
 
-def get_shifts(request, year, month):
+def get_shifts(request, id, year, month):
     user = request.user
-    shifts = user.shift_set.filter(date__year=year, date__month=month)
-    
+    shifts = user.shift_set.filter(date__year=year, date__month=month, group__id=id)
+
     return Response(ShiftSerializer(shifts, many=True).data)
 
-def delete_shifts(request, year, month):
+def delete_shifts(request, id, year, month):
     user = request.user
-    shifts = user.shift_set.filter(date__year=year, date__month=month)
+    shifts = user.shift_set.filter(date__year=year, date__month=month, group__id=id)
     shifts.delete()
     return Response("Usunięto")
 

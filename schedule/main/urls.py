@@ -14,5 +14,5 @@ urlpatterns = [
     path('save-solution', save_solution),
     path('render-solution', render_solution),
     path('groups/<int:id>/years-months-with-shifts', years_months_with_shifts_by_group),
-    path('shifts/<int:year>/<int:month>', shifts),
+    path('shifts/<int:id>/<int:year>/<int:month>', shifts),
 ]

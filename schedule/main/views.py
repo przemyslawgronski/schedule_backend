@@ -131,10 +131,10 @@ def years_months_with_shifts_by_group(request, id):
 
 @api_view(['GET', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def shifts(request, year, month):
+def shifts(request, id, year, month):
 
     if request.method == 'GET':
-        return get_shifts(request, year, month)
+        return get_shifts(request, id, year, month)
     
     if request.method == 'DELETE':
-        return delete_shifts(request, year, month)
+        return delete_shifts(request, id, year, month)
