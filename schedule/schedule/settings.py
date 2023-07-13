@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     #added
     'rest_framework',
+    'rest_framework_simplejwt',
     'users',
     'main'
 ]
