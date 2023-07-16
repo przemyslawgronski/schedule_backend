@@ -33,6 +33,10 @@ class UserAccountManager(BaseUserManager):
         return user
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
+  
+  class Meta:
+    verbose_name = 'konto użytkownika'
+
   first_name = models.CharField(max_length=255)
   last_name = models.CharField(max_length=255)
   email = models.EmailField(unique=True, max_length=255)
