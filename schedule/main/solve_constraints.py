@@ -2,6 +2,8 @@ from ortools.sat.python import cp_model
 
 def solve_constraints(num_days:int, num_shifts:int, employees=None, constraints=None, days_off=None):
 
+    # print(num_days, num_shifts, employees, constraints, days_off, sep='\n\n\n')
+
     all_employees = employees if employees else []
     all_shifts = range(num_shifts)
     all_days = range(num_days)
@@ -18,13 +20,13 @@ def solve_constraints(num_days:int, num_shifts:int, employees=None, constraints=
                 shifts[(n, d, s)] = model.NewBoolVar(f'shift_n{n}d{d}s{s}')
 
     # Each shift is assigned to exactly one employee in .
-    if '1 pracownik na zmianie' in constraints:
+    if '1_prac_na_zmianie' in constraints:
         for d in all_days:
             for s in all_shifts:
                 model.Add(sum(shifts[(n, d, s)] for n in all_employees) == 1)
 
     # Each employee works at most one shift per day.
-    if 'Maksymalnie 1 pracownik na dzień' in constraints:
+    if 'max_1_prac_na_dzien' in constraints:
         for n in all_employees:
             for d in all_days:
                 model.Add(sum(shifts[(n, d, s)] for s in all_shifts) <= 1)
@@ -39,7 +41,7 @@ def solve_constraints(num_days:int, num_shifts:int, employees=None, constraints=
                 # day_off - list of days
                 model.Add(sum(shifts[(emp_id, day_off, s)] for s in all_shifts) == 0)
 
-    if 'Po równo' in  constraints:
+    if 'po_rowno' in  constraints:
         lista_sum = []
 
         for n in all_employees:
@@ -81,3 +83,19 @@ if __name__ == '__main__':
         constraints=['1_prac_na_zmianie', 'max_1_prac_na_dzien', 'po_rowno'],
         days_off = {3: [24], 45: [], 54: [26, 27], 55: []}
     ))
+
+
+
+#     30
+
+
+# 3
+
+
+# [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+
+
+# ['po_rowno', '1_prac_na_zmianie']
+
+
+# {2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [], 13: [], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: [], 21: [], 22: []}
