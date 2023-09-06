@@ -11,14 +11,13 @@ def custom_exception_handler(exc, context):
     # @param context - dict with request, view, args, kwargs
     response = exception_handler(exc, context)
 
-    if response is not None:
-        response.data['status_code'] = response.status_code
-
     if isinstance(exc, ProtectedError):
-        response = Response(data={
-            'error': 'ProtectedError',
-            'message': str(exc.protected_objects)[:100]+'...'
-        },
-        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        response = Response(
+            data={
+                'error': 'ProtectedError',
+                'message': str(exc.protected_objects)[:100]+'...'
+            },
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
     return response
