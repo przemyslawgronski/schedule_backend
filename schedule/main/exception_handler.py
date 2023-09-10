@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import exception_handler
 from django.db.models import ProtectedError
 from rest_framework.response import Response
@@ -16,6 +17,15 @@ def custom_exception_handler(exc, context):
             data={
                 'error': 'ProtectedError',
                 'message': str(exc.protected_objects)[:100]+'...'
+            },
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+    if isinstance(exc, ObjectDoesNotExist):
+        response = Response(
+            data={
+                'error': 'ObjectDoesNotExist',
+                'message': 'Nie znaleziono obiektu'
             },
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
