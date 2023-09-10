@@ -154,10 +154,6 @@ def get_obj(ObjectType, request, id):
     '''try to get object by id and chceck for user id compatibility'''
 
     # Exception handled in exception_handler.py
-    item = ObjectType.objects.get(id=id)
-
-    # Item does not belong to user, raise ObjectDoesNotExist exception
-    if item.user != request.user:
-        raise ObjectType.DoesNotExist
+    item = ObjectType.objects.get(id=id, user=request.user)
     
     return item
