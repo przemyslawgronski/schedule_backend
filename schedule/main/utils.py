@@ -144,9 +144,6 @@ def change_item(ObjectType, ObjectSerializer, request, id, fields):
 def delete_item(ObjectType, request, id):
     item = get_obj(ObjectType, request, id)
     
-    if type(item) == Response:
-        return item
-    
     # Exception handled in exception_handler.py
     item.delete()
 
