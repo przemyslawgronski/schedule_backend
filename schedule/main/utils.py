@@ -159,6 +159,7 @@ def delete_item(ObjectType, request, id):
 def get_obj(ObjectType, request, id):
     '''try to get object by id and chceck for user id compatibility'''
 
+    # Exception handled in exception_handler.py
     item = ObjectType.objects.get(id=id)
 
     if item.user != request.user: #TODO: Create Exception
