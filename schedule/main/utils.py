@@ -147,7 +147,7 @@ def delete_item(ObjectType, request, id):
     # Exception handled in exception_handler.py
     item.delete()
 
-    return Response(f"Usunięto")
+    return Response("Usunięto")
 
 
 def get_obj(ObjectType, request, id):
