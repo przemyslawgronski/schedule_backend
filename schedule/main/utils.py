@@ -156,7 +156,8 @@ def get_obj(ObjectType, request, id):
     # Exception handled in exception_handler.py
     item = ObjectType.objects.get(id=id)
 
-    if item.user != request.user: #TODO: Create Exception
-        return Response("Bad user")
+    # Item does not belong to user, raise ObjectDoesNotExist exception
+    if item.user != request.user:
+        raise ObjectType.DoesNotExist
     
     return item
