@@ -144,7 +144,6 @@ def change_item(ObjectType, ObjectSerializer, request, id, fields):
 def delete_item(ObjectType, request, id):
     item = get_obj(ObjectType, request, id)
     
-    # If item is type of Response then it is an error
     if type(item) == Response:
         return item
     
