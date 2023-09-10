@@ -16,7 +16,7 @@ def custom_exception_handler(exc, context):
         response = Response(
             data={
                 'error': 'ProtectedError',
-                'message': str(exc.protected_objects)[:100]+'...'
+                'message': 'Poszę najpierw usunąć powiązane obiekty: ' + str(exc.protected_objects)[:100]+'...'
             },
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
