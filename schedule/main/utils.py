@@ -5,7 +5,6 @@ from .serializers import ShiftSerializer
 from .models import Employee, Shift
 from django.db.models.functions import ExtractYear, ExtractMonth
 from collections import defaultdict
-from django.db.models import ProtectedError
 
 
 # --------------- constraints -----------------
