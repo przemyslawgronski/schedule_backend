@@ -27,7 +27,7 @@ def custom_exception_handler(exc, context):
                 'error': 'ObjectDoesNotExist',
                 'message': 'Nie znaleziono obiektu'
             },
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            status=status.HTTP_404_NOT_FOUND
         )
 
     return response
