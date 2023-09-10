@@ -147,11 +147,9 @@ def delete_item(ObjectType, request, id):
     # If item is type of Response then it is an error
     if type(item) == Response:
         return item
-
-    try:
-        item.delete()
-    except ProtectedError as e:
-        raise e
+    
+    # Exception handled in exception_handler.py
+    item.delete()
 
     return Response(f"Usunięto")
 
