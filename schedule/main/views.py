@@ -13,7 +13,7 @@ def groups(request):
         return get_items_by_item(Group, GroupSerializer, request)
 
     if request.method == 'POST':
-        return create_item(GroupSerializer, request, ["group_name","num_of_shifts", "constraints"])
+        return create_item(GroupSerializer, request, ['group_name','num_of_shifts', 'constraints', 'hide'])
         # hide id false by default
 
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -46,7 +46,7 @@ def employees(request):
         return get_items_by_item(Employee, EmployeeSerializer, request)
 
     if request.method == 'POST':
-        return create_item(EmployeeSerializer, request, ["first_name", "last_name", "groups"])
+        return create_item(EmployeeSerializer, request, ['first_name', 'last_name', 'groups', 'hide'])
 
 @api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticated])
