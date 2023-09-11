@@ -23,8 +23,8 @@ def group(request, id):
     if request.method == 'GET':
         return get_item(Group, GroupSerializer, request, id)
 
-    if request.method == "PUT":
-        return change_item(Group, GroupSerializer, request, id, ["group_name", "num_of_shifts", "constraints", "hide"])
+    if request.method == 'PUT':
+        return change_item(Group, GroupSerializer, request, id, ['group_name', 'num_of_shifts', 'constraints', 'hide'])
 
     if request.method == 'DELETE':
         return delete_item(Group, request, id)
@@ -58,8 +58,8 @@ def employee(request, id):
     if request.method == 'GET':
         return get_item(Employee, EmployeeSerializer, request, id)
 
-    if request.method == "PUT":
-        return change_item(Employee, EmployeeSerializer, request, id, ["first_name","last_name","groups", "hide"])
+    if request.method == 'PUT':
+        return change_item(Employee, EmployeeSerializer, request, id, ['first_name','last_name','groups', 'hide'])
 
 
 @api_view(['GET'])
@@ -80,7 +80,7 @@ def constraints(request):
         return get_items_by_item(Constraints, ConstraintsSerializer, request)
 
     if request.method == 'POST':
-        return create_item(ConstraintsSerializer, request, ["representation","available_constraints"])
+        return create_item(ConstraintsSerializer, request, ['representation','available_constraints'])
 
 @api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticated])
@@ -92,8 +92,8 @@ def constraint(request, id):
     if request.method == 'GET':
         return get_item(Constraints, ConstraintsSerializer, request, id)
 
-    if request.method == "PUT":
-        return change_item(Constraints, ConstraintsSerializer, request, id, ["representation","available_constraints"])
+    if request.method == 'PUT':
+        return change_item(Constraints, ConstraintsSerializer, request, id, ['representation','available_constraints'])
 
 # ------------------- Available Constraints -------------------
 # Only GET method, available constraints can be managed only by admin
@@ -112,21 +112,21 @@ def available_constraints(request):
 @permission_classes([IsAuthenticated])
 def save_solution(request):
 
-    if request.method == "POST":
+    if request.method == 'POST':
         return create_shifts(request) # save solution
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def render_solution(request):
 
-    if request.method == "POST":
+    if request.method == 'POST':
         return solve_problem(request)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def years_months_with_shifts_by_group(request, id):
 
-    if request.method == "GET":
+    if request.method == 'GET':
         return years_and_months_with_shifts(request, group_id=id)
 
 @api_view(['GET', 'DELETE'])
