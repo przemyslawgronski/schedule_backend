@@ -12,13 +12,14 @@ from collections import defaultdict
 def solve_problem(request):
 
     chosen_group = request.user.group_set.get(id=request.data['group_id'])
-    constraints = request.user.constraints_set.get(id=chosen_group.constraints_id)
+    constraints = request.user.constraints_set.filter(id=chosen_group.constraints_id)
+    constraints_or_empty = [c.name for c in constraints[0].available_constraints.all()] if constraints.exists() else []
 
     result = solve_constraints(
         num_days  = request.data['num_days'],
         employees = [int(k) for k in request.data['checkedBoxes'].keys()],
         num_shifts = chosen_group.num_of_shifts,
-        constraints = [c.name for c in constraints.available_constraints.all()],
+        constraints = constraints_or_empty,
         days_off = { int(k):v for k,v in request.data['checkedBoxes'].items()},
     )
     
