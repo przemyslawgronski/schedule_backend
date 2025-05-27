@@ -1,1 +1,31 @@
-schedule/db.sqlite3
+# ──────────────────────────────────────────────────────────────
+#  ENVIRONMENT / SECRETS
+#  Never commit files that contain private keys or credentials.
+# ──────────────────────────────────────────────────────────────
+*.env                     # .env, dev.env, prod.env, etc.
+
+# ──────────────────────────────────────────────────────────────
+#  LOCAL DATABASE (development-only)
+#  The SQLite file is machine-specific and can be re-created.
+# ──────────────────────────────────────────────────────────────
+/db.sqlite3               # Django default SQLite database
+
+# ──────────────────────────────────────────────────────────────
+#  PYTHON BUILD ARTEFACTS
+#  Byte-compiled files and caches generated at runtime.
+# ──────────────────────────────────────────────────────────────
+__pycache__/              # byte-code cache directories
+*.py[cod]                 # .pyc, .pyo, .pyd
+
+# ──────────────────────────────────────────────────────────────
+#  EDITOR / IDE SETTINGS
+#  Personal configuration — keep it out of the repo.
+# ──────────────────────────────────────────────────────────────
+.vscode/                  # Visual Studio Code settings
+*.code-workspace          # VS Code workspace files
+
+# ──────────────────────────────────────────────────────────────
+#  LOGS & TEMP FILES (optional but common)
+# ──────────────────────────────────────────────────────────────
+*.log                     # runtime logs
+*.tmp                     # generic temp files
